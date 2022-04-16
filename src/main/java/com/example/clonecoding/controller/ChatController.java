@@ -1,7 +1,7 @@
 package com.example.clonecoding.controller;
 
 import com.example.clonecoding.pubsub.RedisPublisher;
-import com.example.clonecoding.dto.ChatMessageDto;
+import com.example.clonecoding.model.ChatMessage;
 import com.example.clonecoding.repository.ChatRoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -17,9 +17,9 @@ public class ChatController {
     //websocket "/pub/chat/message"로 들어오는 메시징을 처리한다.
 
     @MessageMapping("/chat/message")
-    public void message(ChatMessageDto message) {
+    public void message(ChatMessage message) {
 
-        if (ChatMessageDto.MessageType.ENTER.equals(message.getType())) {
+        if (ChatMessage.MessageType.ENTER.equals(message.getType())) {
             chatRoomRepository.enterChatRoom(message.getRoomId());
             message.setMessage(message.getSender() + "님이 입장하셨습니다.");
         }
