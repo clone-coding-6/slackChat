@@ -1,7 +1,7 @@
-package com.week7.slack;
+package com.example.clonecoding.pubsub;
 
+import com.example.clonecoding.model.ChatMessage;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.week7.slack.Dto.ChatMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.Message;

@@ -1,6 +1,6 @@
-package com.week7.slack;
+package com.example.clonecoding.pubsub;
 
-import com.week7.slack.Dto.ChatMessage;
+import com.example.clonecoding.model.ChatMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
