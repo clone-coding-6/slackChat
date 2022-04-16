@@ -1,7 +1,7 @@
 package com.example.clonecoding.repository;
 
 import com.example.clonecoding.pubsub.RedisSubscriber;
-import com.example.clonecoding.dto.ChatRoomDto;
+import com.example.clonecoding.model.ChatRoom;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -23,7 +23,7 @@ public class ChatRoomRepository {
     // Redis
     private static final String CHAT_ROOMS = "CHAT_ROOM";
     private final RedisTemplate<String, Object> redisTemplate;
-    private HashOperations<String, String, ChatRoomDto> opsHashChatRoom;
+    private HashOperations<String, String, ChatRoom> opsHashChatRoom;
     // 채팅방의 대화 메시지를 발행하기 위한 redis topic 정보. 서버별로 채팅방에 매치되는 topic정보를 Map에 넣어 roomId로 찾을수 있도록 한다.
     private Map<String, ChannelTopic> topics;
 
@@ -33,18 +33,18 @@ public class ChatRoomRepository {
         topics = new HashMap<>();
     }
 
-    public List<ChatRoomDto> findAllRoom() {
+    public List<ChatRoom> findAllRoom() {
         return opsHashChatRoom.values(CHAT_ROOMS);
     }
 
-    public ChatRoomDto findRoomById(String id) {
+    public ChatRoom findRoomById(String id) {
         return opsHashChatRoom.get(CHAT_ROOMS, id);
     }
 
 
     //채팅방 생성 : 서버간 채팅방 공유를 위해 redis hash에 저장한다.
-    public ChatRoomDto createChatRoom(String name) {
-        ChatRoomDto chatRoomDto = ChatRoomDto.create(name);
+    public ChatRoom createChatRoom(String name) {
+        ChatRoom chatRoomDto = ChatRoom.create(name);
         opsHashChatRoom.put(CHAT_ROOMS, chatRoomDto.getRoomId(), chatRoomDto);
         return chatRoomDto;
     }
