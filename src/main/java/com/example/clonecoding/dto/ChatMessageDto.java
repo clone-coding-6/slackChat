@@ -1,13 +1,12 @@
-package com.week7.slack.Dto;
+package com.example.clonecoding.dto;
 
-
-import com.week7.slack.model.Timestamped;
+import com.example.clonecoding.model.Timestamped;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class ChatMessage extends Timestamped {
+public class ChatMessageDto extends Timestamped {
     // 메시지 타입 : 입장, 채팅
     public enum MessageType {
         ENTER, JOIN, TALK
