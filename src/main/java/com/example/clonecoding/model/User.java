@@ -26,7 +26,6 @@ public class User {
 
     @Column(unique = true)
     private String nickname;
-
     @Column
     private String imageUrl;
 
@@ -43,6 +42,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
+        this.imageUrl = "";
         this.role = role;
         this.kakaoId = kakaoId;
     }
@@ -51,6 +51,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
+        this.imageUrl = "";
         this.role = role;
         this.kakaoId = null;
     }
@@ -59,6 +60,7 @@ public class User {
         this.email = signUpRequestDto.getEmail();
         this.password = signUpRequestDto.getPassword();
         this.nickname = signUpRequestDto.getNickname();
+        this.imageUrl = signUpRequestDto.getImageUrl();
         this.kakaoId = null;
     }
 }
