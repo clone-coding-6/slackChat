@@ -80,7 +80,7 @@
     function connect() {
         // pub/sub event
         ws.connect({}, function(frame) {//26b21e78-53f0-4cab-b74d-c4c65300f41a
-            ws.subscribe("/sub/chat/room/enter"+vm.$data.roomId, function(message) {
+            ws.subscribe("/sub/chat/room/enter/"+vm.$data.roomId, function(message) {
                 var recv = JSON.parse(message.body);
                 vm.recvMessage(recv);
             });
