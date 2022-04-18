@@ -52,7 +52,11 @@ public class ChatRoomRepository {
 
     //채팅방 입장 : redis에 topic을 만들고 pub/sub 통신을 하기 위해 리스너를 설정한다.
     public void enterChatRoom(String roomId) {
+        //roomid = ENTER 요청으로 들어온 roomid(방 입장시 roomid)
+        // topic은 채팅방을 의미
+        // ENTER 요청으로 들어온 roomid로 방을 입장./
         ChannelTopic topic = topics.get(roomId);
+
         if (topic == null) {
             topic = new ChannelTopic(roomId);
             redisMessageListener.addMessageListener(redisSubscriber, topic);

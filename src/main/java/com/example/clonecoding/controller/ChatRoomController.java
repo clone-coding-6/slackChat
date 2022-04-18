@@ -21,7 +21,7 @@ public class ChatRoomController {
 
     private final ChatSerivce chatSerivce;
     private final ChatRoomRepository chatRoomRepository;
-    private  final ChatRoomJPARepository chatRoomJPARepository;
+    private final ChatRoomJPARepository chatRoomJPARepository;
 
     // 모든 채팅방 목록 반환
     @GetMapping("/listlookup")
@@ -29,12 +29,6 @@ public class ChatRoomController {
     public List<ChatRoom> room() {
         return chatRoomRepository.findAllRoom();
     }
-
-//    @GetMapping("/listlookup")
-//    @ResponseBody
-//    public String room(Model model) {
-//        return "/chat/room";
-//    }
 
 
     // 채팅방 생성
