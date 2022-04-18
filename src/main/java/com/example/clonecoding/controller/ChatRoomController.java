@@ -21,19 +21,20 @@ public class ChatRoomController {
     private final ChatRoomService chatRoomService;
     private final ChatSerivce chatSerivce;
     private final ChatRoomRepository chatRoomRepository;
-    private final ChatRoomJpaRepository chatRoomJPARepository;
 
-    @GetMapping("/room/enter/{roomId}")
+    private final ChatRoomJpaRepository chatRoomJpaRepository;
+
+    @GetMapping("room/enter/{roomId}")
     public String roomDetail(Model model, @PathVariable String roomId) {
         model.addAttribute("roomId", roomId);
-        return "roomdetail";
+        return "/chat/roomdetail";
     }
 
     // 모든 채팅방 목록 반환
     @GetMapping("/listlookup")
     @ResponseBody
     public List<ChatRoom> room() {
-        return chatRoomRepository.findAllRoom();
+        return chatRoomJpaRepository.findAll();
     }
 
     // 채팅 리스트 화면
@@ -56,6 +57,12 @@ public class ChatRoomController {
         chatRoomService.delete(roomId);
     }
 
+    //채팅방 내역조회
+    @GetMapping("/message/{roomid}")
+    @ResponseBody
+    public List<ChatMessagedResponseDto> subMessage(@PathVariable String roomid){
+        return chatSerivce.subMessage(roomid);
+    }
 
     // 특정 채팅방 조회 (추가기능)
     @GetMapping("/listlookup/{roomid}")
@@ -63,6 +70,8 @@ public class ChatRoomController {
     public ChatRoom roomInfo(@PathVariable String roomid) {
         return chatRoomRepository.findRoomById(roomid);
     }
+
+
 
     //    @GetMapping("/room/{roomId}")
 //    @ResponseBody
@@ -77,10 +86,4 @@ public class ChatRoomController {
 //        return roomid;
 //    }
 
-    //채팅방 내역조회
-    @GetMapping("/message/{roomid}")
-    @ResponseBody
-    public List<ChatMessagedResponseDto> subMessage(@PathVariable String roomid){
-        return chatSerivce.subMessage(roomid);
-    }
 }
