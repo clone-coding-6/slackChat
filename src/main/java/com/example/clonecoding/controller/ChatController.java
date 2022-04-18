@@ -2,10 +2,12 @@ package com.example.clonecoding.controller;
 
 import com.example.clonecoding.pubsub.RedisPublisher;
 import com.example.clonecoding.model.ChatMessage;
+import com.example.clonecoding.model.MessageType;
 import com.example.clonecoding.repository.ChatRoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @RequiredArgsConstructor
 @Controller
@@ -19,11 +21,13 @@ public class ChatController {
     @MessageMapping("/chat/message")
     public void message(ChatMessage message) {
 
-        if (ChatMessage.MessageType.ENTER.equals(message.getType())) {
+        if (MessageType.ENTER.equals(message.getType())) {
             chatRoomRepository.enterChatRoom(message.getRoomId());
             message.setMessage(message.getSender() + "님이 입장하셨습니다.");
         }
         // Websocket에 발행된 메시지를 redis로 발행한다(publish)
         redisPublisher.publish(chatRoomRepository.getTopic(message.getRoomId()), message);
     }
+
+
 }
