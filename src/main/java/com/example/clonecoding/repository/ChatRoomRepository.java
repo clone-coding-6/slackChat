@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 @RequiredArgsConstructor
 @Repository
 public class ChatRoomRepository {
@@ -41,14 +42,11 @@ public class ChatRoomRepository {
         return opsHashChatRoom.get(CHAT_ROOMS, id);
     }
 
-
     //채팅방 생성 : 서버간 채팅방 공유를 위해 redis hash에 저장한다.
-    public ChatRoom createChatRoom(String name) {
-        ChatRoom chatRoomDto = ChatRoom.create(name);
-        opsHashChatRoom.put(CHAT_ROOMS, chatRoomDto.getRoomId(), chatRoomDto);
-        return chatRoomDto;
+    //채팅방 이름 , 채팅방의 uuid주소 , 채팅방을 레디스에 저장
+    public void createChatRoom(ChatRoom chatRoom) {
+        opsHashChatRoom.put(CHAT_ROOMS, chatRoom.getChatRoomId() , chatRoom);
     }
-
 
     //채팅방 입장 : redis에 topic을 만들고 pub/sub 통신을 하기 위해 리스너를 설정한다.
     public void enterChatRoom(String roomId) {
@@ -63,8 +61,11 @@ public class ChatRoomRepository {
             topics.put(roomId, topic);
         }
     }
-
     public ChannelTopic getTopic(String roomId) {
         return topics.get(roomId);
+    }
+
+    public void deleteChatRoom(String roomId) {
+        opsHashChatRoom.delete(CHAT_ROOMS , roomId);
     }
 }

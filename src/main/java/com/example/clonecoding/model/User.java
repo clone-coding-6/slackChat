@@ -29,6 +29,7 @@ public class User {
     @Column
     private String imageUrl;
 
+
     @Column(nullable = true)
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;

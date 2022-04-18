@@ -2,9 +2,8 @@ package com.example.clonecoding.service;
 
 import com.example.clonecoding.dto.ChatMessagedResponseDto;
 import com.example.clonecoding.model.ChatMessage;
-import com.example.clonecoding.model.ChatRoom;
 import com.example.clonecoding.repository.ChatMessageRepository;
-import com.example.clonecoding.repository.ChatRoomJPARepository;
+import com.example.clonecoding.repository.ChatRoomJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +16,7 @@ import java.util.List;
 public class ChatSerivce {
 
     private final ChatMessageRepository chatMessageRepository;
-    private  final ChatRoomJPARepository chatRoomJPARepository;
+    private  final ChatRoomJpaRepository chatRoomJPARepository;
 
     public List<ChatMessagedResponseDto> subMessage(String roomid) {
         //ChatMessage 리스트 중에서 roomid가 내가입장한 roomid와 같은 메세지,
