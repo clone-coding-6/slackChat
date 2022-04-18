@@ -7,13 +7,6 @@ public class ChatRoomDto {
     @AllArgsConstructor
     @Builder
     @Data
-    public static class RoomSaveRequestDto{
-        String name;
-    }
-
-    @AllArgsConstructor
-    @Builder
-    @Data
     public static class RoomJoinRequestDto{
         MessageType type;
 

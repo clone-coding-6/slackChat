@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import redis.embedded.RedisServer;
-
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
@@ -13,7 +12,7 @@ import javax.annotation.PreDestroy;
 @Configuration
 public class EmbeddedRedisConfig {
 
-    @Value("6379")
+    @Value("${spring.redis.port}")
     private int redisPort;
 
     private RedisServer redisServer;

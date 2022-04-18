@@ -27,6 +27,10 @@ public class User {
     @Column(unique = true)
     private String nickname;
 
+    @Column
+    private String imageUrl;
+
+
     @Column(nullable = true)
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
